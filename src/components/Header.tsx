@@ -109,7 +109,7 @@ export default function Header() {
               Parisha Sharma
             </span>
             <span className="font-bold text-sm bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent sm:hidden">
-              DP
+              PS
             </span>
           </Link>
 
