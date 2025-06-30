@@ -129,7 +129,7 @@ export const contactInfo: ContactInfo = {
   email: "parisha8888@gmail.com",
   phone: "+91 98170 32182",
   location: "Chandigarh, India",
-  github: "https://github.com/orgs/Codeunia/people/848Parisha",
+  github: "https://github.com/848Parisha",
   linkedin: "https://www.linkedin.com/in/parishasharma93/",
   // twitter: "", // No Twitter provided
 };
@@ -137,7 +137,7 @@ export const contactInfo: ContactInfo = {
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
-    url: "https://github.com/orgs/Codeunia/people/848Parisha",
+    url: "https://github.com/848Parisha",
     icon: "github",
   },
   {
