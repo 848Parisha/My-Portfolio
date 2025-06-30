@@ -103,111 +103,6 @@ export default function Header() {
           {/* Logo - Smaller on mobile */}
           <Link href="/" className="flex items-center space-x-2 cursor-pointer mr-2 sm:mr-4 flex-shrink-0">
             <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-"use client";
-
-import { useRef, useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { IconHome, IconUser, IconBriefcase, IconBook, IconMail } from "@tabler/icons-react";
-import { SimpleSearch } from "@/components/ui/simple-search";
-import SearchResults from "@/components/SearchResults";
-import {
-  AnimatePresence,
-  MotionValue,
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "motion/react";
-
-const navItems = [
-  { title: "Home", icon: <IconHome size={20} />, href: "#home", id: "home" },
-  { title: "About", icon: <IconUser size={20} />, href: "#about", id: "about" },
-  { title: "Projects", icon: <IconBriefcase size={20} />, href: "#projects", id: "projects" },
-  { title: "Experience", icon: <IconBook size={20} />, href: "#experience", id: "experience" },
-  { title: "Contact", icon: <IconMail size={20} />, href: "#contact", id: "contact" },
-];
-
-export default function Header() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const searchPlaceholders = [
-    "Search for projects...",
-    "Find skills...",
-    "Look for experience...",
-    "Search portfolio...",
-    "Find contact info...",
-  ];
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    if (query.trim()) {
-      setShowSearchResults(true);
-      setLoading(true);
-      setTimeout(() => setLoading(false), 800);
-    } else {
-      setShowSearchResults(false);
-      setLoading(false);
-    }
-  };
-
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      setShowSearchResults(true);
-      setLoading(true);
-      setTimeout(() => setLoading(false), 800);
-    }
-  };
-
-  const closeSearchResults = () => {
-    setShowSearchResults(false);
-    setSearchQuery("");
-  };
-
-  // Floating Dock logic for desktop
-  let mouseX = useMotionValue(Infinity);
-
-  // Scrollspy logic
-  const [activeSection, setActiveSection] = useState("home");
-  const sectionIds = ["home", "about", "projects", "experience", "contact"];
-  
-  // Listen to scroll and update active section
-  useEffect(() => {
-    const handleScroll = () => {
-      let current = "home";
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 80) {
-            current = id;
-          }
-        }
-      }
-      setActiveSection(current);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  return (
-    <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-gray-800 shadow-lg"
-      >
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 flex items-center h-14 sm:h-16 lg:h-20">
-          {/* Logo - Smaller on mobile */}
-          <Link href="/" className="flex items-center space-x-2 cursor-pointer mr-2 sm:mr-4 flex-shrink-0">
-            <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-extrabold text-sm sm:text-base lg:text-lg">P</span>
             </div>
             <span className="font-bold text-base sm:text-lg lg:text-xl bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent hidden sm:block">
@@ -289,7 +184,14 @@ export default function Header() {
                         "flex flex-col items-center justify-center py-3 px-2 rounded-xl bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 transition-colors touch-manipulation min-h-[60px]",
                         activeSection === item.id && "ring-2 ring-blue-500 bg-blue-500/10"
                       )}
-                      onClick={() => setMobileOpen(false)}
+                      onClick={e => {
+                        const el = document.getElementById(item.id);
+                        if (el) {
+                          e.preventDefault();
+                          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          setMobileOpen(false);
+                        } // else, let the browser handle the anchor navigation
+                      }}
                     >
                       <div className="h-5 w-5 text-zinc-300 mb-1">{item.icon}</div>
                       <span className="text-xs text-zinc-300 text-center leading-tight">{item.title}</span>
