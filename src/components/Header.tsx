@@ -105,10 +105,10 @@ export default function Header() {
             <div className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-extrabold text-sm sm:text-base lg:text-lg">P</span>
             </div>
-            <span className="font-bold text-base sm:text-lg lg:text-xl bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent hidden sm:block">
+            <span className="font-bold text-base sm:text-lg lg:text-xl text-white hidden sm:block">
               Parisha Sharma
             </span>
-            <span className="font-bold text-sm bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent sm:hidden">
+            <span className="font-bold text-sm text-white sm:hidden">
               PS
             </span>
           </Link>

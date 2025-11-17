@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-black text-white`}>
+    <html lang="en" className="scroll-smooth dark">
+      <body className={`${inter.className} bg-black text-white`} style={{ colorScheme: 'dark' }}>
         <Header />
         <main className="pt-16 pb-8">
         {children}
